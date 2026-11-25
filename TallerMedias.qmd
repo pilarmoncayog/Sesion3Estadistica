@@ -1,0 +1,432 @@
+---
+title: "Taller de Estadística Descriptiva — Administración Pública"
+subtitle: "Media aritmética, armónica y geométrica en R"
+author: 
+  - name: Oscar Fernando Gonzalez Barrera<br>Rosa del Pilar Moncayo González
+    affiliation: "Escuela Superior de Administración Pública"
+    affiliation-url: "https://www.esap.edu.co/"
+date: today
+lang: es
+title-block-banner: "#edcf98"
+title-block-banner-color: "#0F3193"
+
+format:
+  html:
+    page-layout: full
+    fontsize: 14pt
+    toc: true
+    toc-location: right
+    number-sections: true
+    code-fold: true
+    code-summary: "Ver código"
+    theme: dark
+    highlight-style: monokai
+    html-math-method: katex
+    smooth-scroll: true
+    link-external-newwindow: true
+    code-overflow: scroll
+    favicon: favicon.ico
+    
+editor: visual
+
+knitr:
+  opts_chunk:
+    message: false
+    warning: false
+    fig.align: center
+    fig.width: 6
+    fig.height: 6
+    out.width: "70%"
+---
+
+```{=html}
+<div style="position:absolute; top:50px; right:250px;">
+<img src="Logo_Esap.png" width="150">
+</div>
+```
+
+```{=html}
+<style>
+body{
+  background-color:#f7f6ed;
+  font-size:130%;
+  text-align:justify;
+}
+</style>
+```
+
+# Preparación del entorno
+
+Las instalaciones se ejecutan solo si el paquete no está disponible, de modo que el documento se pueda renderizar sin errores desde el inicio.
+
+```{r}
+#| label: setup
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+paquetes <- c("dplyr", "psych", "DescTools", "knitr")
+faltan <- paquetes[!paquetes %in% rownames(installed.packages())]
+if (length(faltan) > 0) install.packages(faltan)
+
+library(dplyr)
+library(knitr)
+# psych y DescTools se invocan con :: para evitar conflictos de nombres
+options(digits = 7)
+```
+
+# PARTE I. Datos no agrupados
+
+## Ejercicio 1. Tiempos de respuesta a solicitudes
+
+**Fórmula (media aritmética):**
+
+$$\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}$$
+
+donde $x_i$ es el tiempo de respuesta (días hábiles) de la solicitud $i$ y $n = 12$.
+
+```{r}
+#| label: ej1
+# 1. Datos
+dias <- c(3, 5, 4, 6, 8, 4, 7, 5, 3, 9, 6, 4)
+
+# 2. Media con mean()
+media_dias <- mean(dias)
+
+# 3. Cálculo manual y comprobación
+media_manual <- sum(dias) / length(dias)
+
+round(media_dias, 4)
+round(media_manual, 4)
+all.equal(media_dias, media_manual)
+
+# 4. Comparación con la meta de 5 días hábiles
+meta <- 5
+media_dias <= meta
+```
+
+**Meta institucional (actividad 4).** El tiempo promedio es `r round(media_dias, 2)` días hábiles, es decir, `r round(media_dias - meta, 2)` días por encima de la meta de 5. **No se cumple la meta** en promedio. Además, 7 de las 12 solicitudes (el 58,3 %) se resolvieron en 5 días o menos, pero las solicitudes de 7, 8 y 9 días elevan el promedio.
+
+**Pertinencia de la media aritmética (actividad 5).** Los tiempos son valores aditivos medidos en la misma unidad (días), y cada solicitud tiene el mismo peso. La suma de los tiempos tiene sentido (días totales de trabajo) y el promedio indica cuánto tarda, en promedio, una solicitud. Por eso la media aritmética es la medida adecuada. Su limitación es la sensibilidad a valores extremos, como el de 9 días.
+
+## Ejercicio 2. Velocidad de atención de brigadas
+
+**Fórmula (media armónica):**
+
+$$H = \frac{n}{\sum_{i=1}^{n} \frac{1}{x_i}}$$
+
+Condición: ningún $x_i$ puede ser cero (y deben ser positivos).
+
+```{r}
+#| label: ej2
+# 6. Vector de velocidades (km/h)
+velocidad <- c(24, 30, 36, 40, 45)
+stopifnot(all(velocidad > 0))   # verificación de condición
+
+# 7. Media armónica manual
+H_manual <- length(velocidad) / sum(1 / velocidad)
+
+# 8. Verificación con paquetes
+H_psych <- psych::harmonic.mean(velocidad)
+H_desc  <- DescTools::Hmean(velocidad)
+
+# 9. Comparación con la media aritmética
+media_vel <- mean(velocidad)
+
+resultados2 <- data.frame(
+  Medida = c("Armónica (manual)", "Armónica (psych)",
+             "Armónica (DescTools)", "Aritmética"),
+  `Velocidad (km/h)` = round(c(H_manual, H_psych, H_desc, media_vel), 4),
+  check.names = FALSE
+)
+kable(resultados2)
+```
+
+**Interpretación (actividad 10).** Con recorridos de igual longitud $d$, el tiempo total es $\sum d/x_i$ y la distancia total es $n \cdot d$. La velocidad promedio real es distancia total / tiempo total $= n / \sum (1/x_i)$, que es exactamente la media armónica (`r round(H_manual, 2)` km/h). La media aritmética (`r round(media_vel, 2)` km/h) **sobrestima** la velocidad promedio porque da el mismo peso a cada velocidad, cuando las brigadas lentas pasan más tiempo en carretera. Se cumple siempre que $H \le G \le \bar{x}$.
+
+**Si las distancias fueran diferentes**, ya no se usaría la media armónica simple, sino la **armónica ponderada por distancias**: $H = \sum d_i / \sum (d_i/x_i)$. Si en cambio los *tiempos* fueran iguales, la media correcta sería la aritmética.
+
+## Ejercicio 3. Crecimiento de la recaudación municipal
+
+**Fórmula (media geométrica de factores):**
+
+$$G = \left(\prod_{i=1}^{n} f_i\right)^{1/n} = \exp\left(\frac{1}{n}\sum \ln f_i\right), \qquad f_i = 1 + \frac{r_i}{100}$$
+
+$$\text{tasa compuesta} = (G - 1)\times 100$$
+
+```{r}
+#| label: ej3
+# 11. Tasas porcentuales
+tasas <- c(6, 9, 12, 5, 10)
+
+# 12. Factores de crecimiento
+factores <- 1 + tasas / 100
+stopifnot(all(factores > 0))
+
+# 13. Media geométrica y tasa compuesta
+G <- exp(mean(log(factores)))
+tasa_compuesta <- (G - 1) * 100
+
+round(G, 6)
+round(tasa_compuesta, 4)
+
+# 14. Comparación con la media aritmética simple
+round(mean(tasas), 4)
+
+# 15. Verificación con paquetes
+G_psych <- psych::geometric.mean(factores)
+G_desc  <- DescTools::Gmean(factores)
+c(manual = G, psych = G_psych, DescTools = G_desc) |> round(6)
+c(manual = tasa_compuesta,
+  psych = (G_psych - 1) * 100,
+  DescTools = (G_desc - 1) * 100) |> round(4)
+```
+
+**Interpretación (actividad 14).** La tasa anual compuesta promedio es `r round(tasa_compuesta, 2)` %, ligeramente inferior a la media aritmética de las tasas (`r round(mean(tasas), 2)` %). Difieren porque el crecimiento se **acumula multiplicativamente**: cada año crece sobre la base del año anterior. La media geométrica es la tasa constante que, aplicada durante cinco años, produce el mismo crecimiento total que las tasas observadas. La media aritmética siempre es mayor o igual que la geométrica, y la diferencia crece con la dispersión de las tasas.
+
+# PARTE II. Datos agrupados en tablas de frecuencias
+
+## Ejercicio 4. Número de trámites atendidos
+
+**Fórmula (media aritmética ponderada):**
+
+$$\bar{x} = \frac{\sum f_i x_i}{N}, \qquad N = \sum f_i$$
+
+```{r}
+#| label: ej4
+# 16. Data frame
+xi <- c(8, 10, 12, 14, 16)
+fi <- c(3, 5, 9, 8, 5)
+tabla4 <- data.frame(xi, fi, fi_xi = fi * xi)
+tabla4
+
+# 17. Media ponderada
+N <- sum(fi)
+media_pond <- sum(fi * xi) / N
+N
+round(media_pond, 4)
+
+# 18. Verificación expandiendo los datos
+datos <- rep(xi, times = fi)
+length(datos)                 # debe ser igual a N
+round(mean(datos), 4)
+
+# Comprobación del error al ignorar las frecuencias (actividad 20)
+round(mean(xi), 4)
+```
+
+**Interpretación (actividad 19).** En promedio cada funcionario atendió aproximadamente `r round(media_pond, 2)` trámites por jornada.
+
+**Por qué no usar `mean(xi)` (actividad 20).** `mean(xi)` = `r mean(xi)` trata cada valor distinto (8, 10, 12, 14, 16) como si hubiera un solo funcionario en cada uno. Pero hay 9 funcionarios con 12 trámites y solo 3 con 8, así que los valores no pesan igual. Ignorar las frecuencias distorsiona el resultado.
+
+## Ejercicio 5. Tasas de procesamiento de expedientes
+
+**Fórmula (media armónica ponderada):**
+
+$$H = \frac{N}{\sum f_i / x_i}$$
+
+```{r}
+#| label: ej5
+# 21. Data frame
+xi <- c(4, 5, 8, 10)
+fi <- c(4, 6, 7, 3)
+tabla5 <- data.frame(xi, fi, fi_sobre_xi = fi / xi)
+tabla5
+
+stopifnot(all(xi > 0))
+N <- sum(fi)
+
+# 22. Media armónica ponderada
+H <- N / sum(fi / xi)
+round(H, 4)
+
+# 23. Verificación con datos expandidos
+datos <- rep(xi, times = fi)
+round(psych::harmonic.mean(datos), 4)
+round(DescTools::Hmean(datos), 4)
+
+# 24. Media aritmética ponderada y comparación
+A <- sum(fi * xi) / N
+comparacion5 <- data.frame(
+  Medida = c("Armónica ponderada", "Aritmética ponderada"),
+  `Expedientes/hora` = round(c(H, A), 4),
+  check.names = FALSE
+)
+kable(comparacion5)
+```
+
+**Discusión (actividad 25).** La armónica ponderada (`r round(H, 2)`) es menor que la aritmética (`r round(A, 2)`). Cuál es defendible depende de qué se mantiene constante:
+
+- La **media armónica** es la correcta cuando cada tasa se observa sobre la **misma cantidad de trabajo** (el mismo número de expedientes, es decir, igual "numerador"). Entonces el tiempo total es $\sum (\text{expedientes}/x_i)$ y la tasa global real es expedientes totales / tiempo total.
+- La **media aritmética** es la correcta cuando cada tasa se observa durante el **mismo tiempo** (jornadas de igual duración), pues los expedientes totales son $\sum x_i \cdot t$.
+
+Aquí las frecuencias cuentan *jornadas*. Si todas las jornadas tienen igual duración, el promedio de tasas apropiado sería el aritmético (`r round(A, 2)`), y la armónica subestimaría el rendimiento. La armónica sería defendible solo si cada grupo de jornadas hubiera procesado un volumen **igual de expedientes**, algo que el enunciado no indica. En conclusión: para interpretar la armónica como promedio de tasas debe garantizarse una **exposición equivalente en cantidad de trabajo** entre los grupos.
+
+## Ejercicio 6. Factores de crecimiento de la cobertura
+
+**Fórmula (media geométrica ponderada):**
+
+$$G = \exp\left(\frac{\sum f_i \ln x_i}{\sum f_i}\right)$$
+
+```{r}
+#| label: ej6
+# 26. Vectores
+xi <- c(1.02, 1.05, 1.08, 1.12)
+fi <- c(4, 8, 5, 3)
+stopifnot(all(xi > 0))
+
+# 27. Media geométrica ponderada
+G <- exp(sum(fi * log(xi)) / sum(fi))
+round(G, 6)
+
+# 28. Tasa porcentual
+tasa <- (G - 1) * 100
+round(tasa, 4)
+
+# 29. Verificación con datos expandidos
+datos <- rep(xi, times = fi)
+round(DescTools::Gmean(datos), 6)
+round(psych::geometric.mean(datos), 6)
+
+# Referencia: media aritmética ponderada de los factores
+round(sum(fi * xi) / sum(fi), 6)
+```
+
+**Interpretación (actividad 30).** El factor de crecimiento promedio es `r round(G, 4)`, equivalente a un crecimiento anual típico de la cobertura de `r round(tasa, 2)` %. Los factores se **multiplican** de un periodo a otro (la cobertura final es la inicial por el producto de los factores), por eso el promedio adecuado es la media geométrica: es el factor constante que reproduce el mismo efecto acumulado. Promediar aritméticamente los factores sobrestimaría ligeramente el crecimiento.
+
+# PARTE III. Datos agrupados en intervalos
+
+## Ejercicio 7. Gasto mensual por habitante
+
+**Fórmulas:**
+
+$$m_i = \frac{L_i + L_s}{2}, \qquad \bar{x} \approx \frac{\sum f_i m_i}{N}$$
+
+```{r}
+#| label: ej7
+# 31-34. Tabla con dplyr
+tabla7 <- tibble(
+  Li = c(100, 200, 300, 400, 500),
+  Ls = c(200, 300, 400, 500, 600),
+  fi = c(5, 9, 14, 8, 4)
+) %>%
+  mutate(
+    Intervalo = paste0(Li, " – <", Ls),
+    mi        = (Li + Ls) / 2,        # 32. marca de clase
+    fi_mi     = fi * mi               # 33. producto fi*mi
+  ) %>%
+  select(Intervalo, Li, Ls, fi, mi, fi_mi)
+
+kable(tabla7, caption = "Gasto mensual por habitante (miles de pesos)")
+
+N <- sum(tabla7$fi)
+media_aprox <- sum(tabla7$fi_mi) / N
+N
+round(media_aprox, 2)
+```
+
+**Interpretación (actividad 35).** El gasto mensual promedio estimado es de aproximadamente **`r round(media_aprox, 1)` miles de pesos** por habitante (unos \$`r format(round(media_aprox * 1000), big.mark = ".", decimal.mark = ",")`). Es un valor **aproximado** porque se desconocen los datos originales: se supone que todos los barrios de un intervalo gastan exactamente lo que indica su marca de clase, y la distribución real dentro de cada intervalo puede ser distinta.
+
+## Ejercicio 8. Índice de crecimiento de ingresos
+
+```{r}
+#| label: ej8
+# 36. Límites y marcas de clase
+Li <- c(1.00, 1.04, 1.08, 1.12)
+Ls <- c(1.04, 1.08, 1.12, 1.16)
+fi <- c(6, 10, 9, 5)
+mi <- (Li + Ls) / 2
+stopifnot(all(mi > 0))
+
+tabla8 <- tibble(Li, Ls, fi, mi, fi_ln_mi = fi * log(mi))
+kable(tabla8, digits = 4)
+
+# 37. Media geométrica aproximada
+G <- exp(sum(fi * log(mi)) / sum(fi))
+round(G, 6)
+
+# 38. Tasa porcentual
+tasa <- (G - 1) * 100
+round(tasa, 4)
+
+# Referencia para la actividad 40
+A <- sum(fi * mi) / sum(fi)
+round(A, 6)
+```
+
+**Supuesto (actividad 39).** Representar cada intervalo por su marca de clase supone que los factores de las unidades dentro del intervalo se concentran en el punto medio (o que se distribuyen de forma simétrica y uniforme). Por eso el resultado es una aproximación.
+
+**Comparación con la media aritmética (actividad 40).** El factor geométrico promedio es `r round(G, 4)` (crecimiento anual típico ≈ `r round(tasa, 2)` %), frente a `r round(A, 4)` de la media aritmética de los factores. La geométrica es la adecuada porque los factores se componen multiplicativamente; la aritmética es siempre mayor o igual, y la diferencia es pequeña aquí porque los factores son poco dispersos.
+
+# PARTE IV. Integración y análisis
+
+## Ejercicio 9. Selección de la medida adecuada
+
+```{r}
+#| label: ej9
+seleccion <- data.frame(
+  Indicador = c("(a) Días que tardan los trámites",
+                "(b) Velocidades en recorridos de igual distancia",
+                "(c) Factores anuales de crecimiento de cobertura"),
+  Medida = c("Aritmética", "Armónica", "Geométrica"),
+  Justificación = c(
+    "Valores aditivos en la misma unidad (días); cada trámite pesa igual y la suma tiene sentido.",
+    "Se promedian razones (km/h) con distancia fija: el promedio real es distancia total / tiempo total.",
+    "Los factores se acumulan multiplicativamente; se busca el factor constante equivalente."
+  )
+)
+kable(seleccion)
+```
+
+**41–42. Elección y justificación.** Ver la tabla anterior.
+
+**43. Por qué no una única medida.** Cada media responde a una estructura distinta del fenómeno: suma de cantidades (aritmética), razones con numerador constante (armónica) y productos de cambios relativos (geométrica). Aplicar la misma a todos produce sesgos: la aritmética sobrestima velocidades promedio y tasas compuestas; la armónica y la geométrica no tienen sentido para tiempos simples. Además existe la relación $H \le G \le \bar{x}$, de modo que elegir mal sistemáticamente desplaza el resultado.
+
+**44. Indicadores adicionales propuestos.**
+
+- **Aritmética:** monto promedio de recaudación de impuesto predial por predio, o número promedio de personas atendidas por ventanilla por día.
+- **Armónica:** rendimiento promedio (km por galón) de vehículos de inspección que recorren la misma ruta, o costo por beneficiario cuando se gasta un mismo presupuesto en distintos programas.
+- **Geométrica:** crecimiento anual compuesto del presupuesto de inversión, o variación anual de la matrícula en programas sociales.
+
+## Ejercicio 10. Informe breve de resultados
+
+### Objetivo y contexto
+
+La Secretaría de Hacienda de un municipio requiere conocer la **tasa anual compuesta promedio de crecimiento de la recaudación propia** en los últimos cinco años, para proyectar ingresos y compararla con el resultado de otras entidades. Se dispone de las tasas anuales de crecimiento: 6 %, 9 %, 12 %, 5 % y 10 % (datos simulados).
+
+### Medida, fórmula y justificación
+
+Se calculó la **media geométrica** de los factores de crecimiento $f_i = 1 + r_i/100$:
+
+$$G = \left(\prod f_i\right)^{1/n}, \qquad \text{tasa compuesta} = (G-1)\times 100$$
+
+La recaudación de cada año crece sobre la del año anterior, por lo que el efecto acumulado es un producto de factores; la media geométrica es la que conserva ese efecto acumulado.
+
+### Código y resultado
+
+```{r}
+#| label: ej10
+tasas <- c(6, 9, 12, 5, 10)
+factores <- 1 + tasas / 100
+G <- exp(mean(log(factores)))
+tasa_compuesta <- (G - 1) * 100
+
+resultado10 <- data.frame(
+  Medida = c("Media geométrica de factores", "Tasa anual compuesta (%)",
+             "Media aritmética de tasas (%)",
+             "Crecimiento acumulado del periodo (%)"),
+  Valor = round(c(G, tasa_compuesta, mean(tasas),
+                  (prod(factores) - 1) * 100), 4)
+)
+kable(resultado10)
+
+# Comprobación: aplicar G cinco veces equivale al crecimiento acumulado
+all.equal(G^5, prod(factores))
+```
+
+### Interpretación en lenguaje de gestión pública
+
+La recaudación propia creció, en promedio, **`r round(tasa_compuesta, 2)` % anual compuesto** durante el periodo. Esto equivale a un incremento acumulado de `r round((prod(factores) - 1) * 100, 1)` % en cinco años. Si la administración hubiera usado la media aritmética (`r round(mean(tasas), 2)` %), habría sobrestimado levemente el ritmo de crecimiento y, por tanto, los ingresos proyectados.
+
+### Limitación y condición de uso
+
+La media geométrica exige que **todos los factores sean positivos** y asume que el crecimiento se compone año a año sobre la base anterior. Es un promedio de un periodo corto (cinco observaciones) y no garantiza que el crecimiento futuro se mantenga: no refleja la volatilidad ni cambios normativos o de la base tributaria.
+

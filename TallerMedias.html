@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Oscar Fernando Gonzalez Barrera Rosa del Pilar Moncayo González">
+
+<title>Taller de Estadística Descriptiva — Administración Pública</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="TallerMedias_files/libs/clipboard/clipboard.min.js"></script>
+<script src="TallerMedias_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="TallerMedias_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="TallerMedias_files/libs/quarto-html/popper.min.js"></script>
+<script src="TallerMedias_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="TallerMedias_files/libs/quarto-html/anchor.min.js"></script>
+<link href="TallerMedias_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="TallerMedias_files/libs/quarto-html/quarto-syntax-highlighting-da6801bb47887cffec19aab6b5fb5c7d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="TallerMedias_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="TallerMedias_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="TallerMedias_files/libs/bootstrap/bootstrap-4b064ad5cf698f245b930d8c9ed74028.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+<style>
+
+      .quarto-title-block .quarto-title-banner h1,
+      .quarto-title-block .quarto-title-banner h2,
+      .quarto-title-block .quarto-title-banner h3,
+      .quarto-title-block .quarto-title-banner h4,
+      .quarto-title-block .quarto-title-banner h5,
+      .quarto-title-block .quarto-title-banner h6
+      {
+        color: #0F3193;
+      }
+
+      .quarto-title-block .quarto-title-banner {
+        color: #0F3193;
+background: #edcf98;
+      }
+</style>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Taller de Estadística Descriptiva — Administración Pública</h1>
+            <p class="subtitle lead">Media aritmética, armónica y geométrica en R</p>
+                      </div>
+  </div>
+    
+  <div class="quarto-title-meta-author column-page-left">
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-heading">Afiliación</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author">Oscar Fernando Gonzalez Barrera<br>Rosa del Pilar Moncayo González </p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              <a href="https://www.esap.edu.co/">
+              Escuela Superior de Administración Pública
+              </a>
+            </p>
+        </div>
+    </div>
+
+  <div class="quarto-title-meta column-page-left">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Fecha de publicación</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">25 de noviembre de 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#preparación-del-entorno" id="toc-preparación-del-entorno" class="nav-link active" data-scroll-target="#preparación-del-entorno"><span class="header-section-number">1</span> Preparación del entorno</a></li>
+  <li><a href="#parte-i.-datos-no-agrupados" id="toc-parte-i.-datos-no-agrupados" class="nav-link" data-scroll-target="#parte-i.-datos-no-agrupados"><span class="header-section-number">2</span> PARTE I. Datos no agrupados</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-1.-tiempos-de-respuesta-a-solicitudes" id="toc-ejercicio-1.-tiempos-de-respuesta-a-solicitudes" class="nav-link" data-scroll-target="#ejercicio-1.-tiempos-de-respuesta-a-solicitudes"><span class="header-section-number">2.1</span> Ejercicio 1. Tiempos de respuesta a solicitudes</a></li>
+  <li><a href="#ejercicio-2.-velocidad-de-atención-de-brigadas" id="toc-ejercicio-2.-velocidad-de-atención-de-brigadas" class="nav-link" data-scroll-target="#ejercicio-2.-velocidad-de-atención-de-brigadas"><span class="header-section-number">2.2</span> Ejercicio 2. Velocidad de atención de brigadas</a></li>
+  <li><a href="#ejercicio-3.-crecimiento-de-la-recaudación-municipal" id="toc-ejercicio-3.-crecimiento-de-la-recaudación-municipal" class="nav-link" data-scroll-target="#ejercicio-3.-crecimiento-de-la-recaudación-municipal"><span class="header-section-number">2.3</span> Ejercicio 3. Crecimiento de la recaudación municipal</a></li>
+  </ul></li>
+  <li><a href="#parte-ii.-datos-agrupados-en-tablas-de-frecuencias" id="toc-parte-ii.-datos-agrupados-en-tablas-de-frecuencias" class="nav-link" data-scroll-target="#parte-ii.-datos-agrupados-en-tablas-de-frecuencias"><span class="header-section-number">3</span> PARTE II. Datos agrupados en tablas de frecuencias</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-4.-número-de-trámites-atendidos" id="toc-ejercicio-4.-número-de-trámites-atendidos" class="nav-link" data-scroll-target="#ejercicio-4.-número-de-trámites-atendidos"><span class="header-section-number">3.1</span> Ejercicio 4. Número de trámites atendidos</a></li>
+  <li><a href="#ejercicio-5.-tasas-de-procesamiento-de-expedientes" id="toc-ejercicio-5.-tasas-de-procesamiento-de-expedientes" class="nav-link" data-scroll-target="#ejercicio-5.-tasas-de-procesamiento-de-expedientes"><span class="header-section-number">3.2</span> Ejercicio 5. Tasas de procesamiento de expedientes</a></li>
+  <li><a href="#ejercicio-6.-factores-de-crecimiento-de-la-cobertura" id="toc-ejercicio-6.-factores-de-crecimiento-de-la-cobertura" class="nav-link" data-scroll-target="#ejercicio-6.-factores-de-crecimiento-de-la-cobertura"><span class="header-section-number">3.3</span> Ejercicio 6. Factores de crecimiento de la cobertura</a></li>
+  </ul></li>
+  <li><a href="#parte-iii.-datos-agrupados-en-intervalos" id="toc-parte-iii.-datos-agrupados-en-intervalos" class="nav-link" data-scroll-target="#parte-iii.-datos-agrupados-en-intervalos"><span class="header-section-number">4</span> PARTE III. Datos agrupados en intervalos</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-7.-gasto-mensual-por-habitante" id="toc-ejercicio-7.-gasto-mensual-por-habitante" class="nav-link" data-scroll-target="#ejercicio-7.-gasto-mensual-por-habitante"><span class="header-section-number">4.1</span> Ejercicio 7. Gasto mensual por habitante</a></li>
+  <li><a href="#ejercicio-8.-índice-de-crecimiento-de-ingresos" id="toc-ejercicio-8.-índice-de-crecimiento-de-ingresos" class="nav-link" data-scroll-target="#ejercicio-8.-índice-de-crecimiento-de-ingresos"><span class="header-section-number">4.2</span> Ejercicio 8. Índice de crecimiento de ingresos</a></li>
+  </ul></li>
+  <li><a href="#parte-iv.-integración-y-análisis" id="toc-parte-iv.-integración-y-análisis" class="nav-link" data-scroll-target="#parte-iv.-integración-y-análisis"><span class="header-section-number">5</span> PARTE IV. Integración y análisis</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-9.-selección-de-la-medida-adecuada" id="toc-ejercicio-9.-selección-de-la-medida-adecuada" class="nav-link" data-scroll-target="#ejercicio-9.-selección-de-la-medida-adecuada"><span class="header-section-number">5.1</span> Ejercicio 9. Selección de la medida adecuada</a></li>
+  <li><a href="#ejercicio-10.-informe-breve-de-resultados" id="toc-ejercicio-10.-informe-breve-de-resultados" class="nav-link" data-scroll-target="#ejercicio-10.-informe-breve-de-resultados"><span class="header-section-number">5.2</span> Ejercicio 10. Informe breve de resultados</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-y-contexto" id="toc-objetivo-y-contexto" class="nav-link" data-scroll-target="#objetivo-y-contexto"><span class="header-section-number">5.2.1</span> Objetivo y contexto</a></li>
+  <li><a href="#medida-fórmula-y-justificación" id="toc-medida-fórmula-y-justificación" class="nav-link" data-scroll-target="#medida-fórmula-y-justificación"><span class="header-section-number">5.2.2</span> Medida, fórmula y justificación</a></li>
+  <li><a href="#código-y-resultado" id="toc-código-y-resultado" class="nav-link" data-scroll-target="#código-y-resultado"><span class="header-section-number">5.2.3</span> Código y resultado</a></li>
+  <li><a href="#interpretación-en-lenguaje-de-gestión-pública" id="toc-interpretación-en-lenguaje-de-gestión-pública" class="nav-link" data-scroll-target="#interpretación-en-lenguaje-de-gestión-pública"><span class="header-section-number">5.2.4</span> Interpretación en lenguaje de gestión pública</a></li>
+  <li><a href="#limitación-y-condición-de-uso" id="toc-limitación-y-condición-de-uso" class="nav-link" data-scroll-target="#limitación-y-condición-de-uso"><span class="header-section-number">5.2.5</span> Limitación y condición de uso</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<div style="position:absolute; top:50px; right:250px;">
+<img src="Logo_Esap.png" width="150">
+</div>
+<style>
+body{
+  background-color:#f7f6ed;
+  font-size:130%;
+  text-align:justify;
+}
+</style>
+<section id="preparación-del-entorno" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Preparación del entorno</h1>
+<p>Las instalaciones se ejecutan solo si el paquete no está disponible, de modo que el documento se pueda renderizar sin errores desde el inicio.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cloud.r-project.org"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>paquetes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dplyr"</span>, <span class="st">"psych"</span>, <span class="st">"DescTools"</span>, <span class="st">"knitr"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>faltan <span class="ot">&lt;-</span> paquetes[<span class="sc">!</span>paquetes <span class="sc">%in%</span> <span class="fu">rownames</span>(<span class="fu">installed.packages</span>())]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(faltan) <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">install.packages</span>(faltan)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># psych y DescTools se invocan con :: para evitar conflictos de nombres</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">7</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="parte-i.-datos-no-agrupados" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> PARTE I. Datos no agrupados</h1>
+<section id="ejercicio-1.-tiempos-de-respuesta-a-solicitudes" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="ejercicio-1.-tiempos-de-respuesta-a-solicitudes"><span class="header-section-number">2.1</span> Ejercicio 1. Tiempos de respuesta a solicitudes</h2>
+<p><strong>Fórmula (media aritmética):</strong></p>
+<p><span class="math display">\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}</span></p>
+<p>donde <span class="math inline">x_i</span> es el tiempo de respuesta (días hábiles) de la solicitud <span class="math inline">i</span> y <span class="math inline">n = 12</span>.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Datos</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dias <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">4</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Media con mean()</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>media_dias <span class="ot">&lt;-</span> <span class="fu">mean</span>(dias)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Cálculo manual y comprobación</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>media_manual <span class="ot">&lt;-</span> <span class="fu">sum</span>(dias) <span class="sc">/</span> <span class="fu">length</span>(dias)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(media_dias, <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.3333</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(media_manual, <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.3333</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(media_dias, media_manual)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Comparación con la meta de 5 días hábiles</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>media_dias <span class="sc">&lt;=</span> meta</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p><strong>Meta institucional (actividad 4).</strong> El tiempo promedio es 5.33 días hábiles, es decir, 0.33 días por encima de la meta de 5. <strong>No se cumple la meta</strong> en promedio. Además, 7 de las 12 solicitudes (el 58,3 %) se resolvieron en 5 días o menos, pero las solicitudes de 7, 8 y 9 días elevan el promedio.</p>
+<p><strong>Pertinencia de la media aritmética (actividad 5).</strong> Los tiempos son valores aditivos medidos en la misma unidad (días), y cada solicitud tiene el mismo peso. La suma de los tiempos tiene sentido (días totales de trabajo) y el promedio indica cuánto tarda, en promedio, una solicitud. Por eso la media aritmética es la medida adecuada. Su limitación es la sensibilidad a valores extremos, como el de 9 días.</p>
+</section>
+<section id="ejercicio-2.-velocidad-de-atención-de-brigadas" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="ejercicio-2.-velocidad-de-atención-de-brigadas"><span class="header-section-number">2.2</span> Ejercicio 2. Velocidad de atención de brigadas</h2>
+<p><strong>Fórmula (media armónica):</strong></p>
+<p><span class="math display">H = \frac{n}{\sum_{i=1}^{n} \frac{1}{x_i}}</span></p>
+<p>Condición: ningún <span class="math inline">x_i</span> puede ser cero (y deben ser positivos).</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Vector de velocidades (km/h)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>velocidad <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">24</span>, <span class="dv">30</span>, <span class="dv">36</span>, <span class="dv">40</span>, <span class="dv">45</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(velocidad <span class="sc">&gt;</span> <span class="dv">0</span>))   <span class="co"># verificación de condición</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. Media armónica manual</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>H_manual <span class="ot">&lt;-</span> <span class="fu">length</span>(velocidad) <span class="sc">/</span> <span class="fu">sum</span>(<span class="dv">1</span> <span class="sc">/</span> velocidad)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. Verificación con paquetes</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>H_psych <span class="ot">&lt;-</span> psych<span class="sc">::</span><span class="fu">harmonic.mean</span>(velocidad)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>H_desc  <span class="ot">&lt;-</span> DescTools<span class="sc">::</span><span class="fu">Hmean</span>(velocidad)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 9. Comparación con la media aritmética</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>media_vel <span class="ot">&lt;-</span> <span class="fu">mean</span>(velocidad)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>resultados2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">Medida =</span> <span class="fu">c</span>(<span class="st">"Armónica (manual)"</span>, <span class="st">"Armónica (psych)"</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Armónica (DescTools)"</span>, <span class="st">"Aritmética"</span>),</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Velocidad (km/h)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">c</span>(H_manual, H_psych, H_desc, media_vel), <span class="dv">4</span>),</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(resultados2)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Medida</th>
+<th style="text-align: right;">Velocidad (km/h)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Armónica (manual)</td>
+<td style="text-align: right;">33.3333</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Armónica (psych)</td>
+<td style="text-align: right;">33.3333</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Armónica (DescTools)</td>
+<td style="text-align: right;">33.3333</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Aritmética</td>
+<td style="text-align: right;">35.0000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>Interpretación (actividad 10).</strong> Con recorridos de igual longitud <span class="math inline">d</span>, el tiempo total es <span class="math inline">\sum d/x_i</span> y la distancia total es <span class="math inline">n \cdot d</span>. La velocidad promedio real es distancia total / tiempo total <span class="math inline">= n / \sum (1/x_i)</span>, que es exactamente la media armónica (33.33 km/h). La media aritmética (35 km/h) <strong>sobrestima</strong> la velocidad promedio porque da el mismo peso a cada velocidad, cuando las brigadas lentas pasan más tiempo en carretera. Se cumple siempre que <span class="math inline">H \le G \le \bar{x}</span>.</p>
+<p><strong>Si las distancias fueran diferentes</strong>, ya no se usaría la media armónica simple, sino la <strong>armónica ponderada por distancias</strong>: <span class="math inline">H = \sum d_i / \sum (d_i/x_i)</span>. Si en cambio los <em>tiempos</em> fueran iguales, la media correcta sería la aritmética.</p>
+</section>
+<section id="ejercicio-3.-crecimiento-de-la-recaudación-municipal" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="ejercicio-3.-crecimiento-de-la-recaudación-municipal"><span class="header-section-number">2.3</span> Ejercicio 3. Crecimiento de la recaudación municipal</h2>
+<p><strong>Fórmula (media geométrica de factores):</strong></p>
+<p><span class="math display">G = \left(\prod_{i=1}^{n} f_i\right)^{1/n} = \exp\left(\frac{1}{n}\sum \ln f_i\right), \qquad f_i = 1 + \frac{r_i}{100}</span></p>
+<p><span class="math display">\text{tasa compuesta} = (G - 1)\times 100</span></p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 11. Tasas porcentuales</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>tasas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 12. Factores de crecimiento</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>factores <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> tasas <span class="sc">/</span> <span class="dv">100</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(factores <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 13. Media geométrica y tasa compuesta</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">mean</span>(<span class="fu">log</span>(factores)))</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>tasa_compuesta <span class="ot">&lt;-</span> (G <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(G, <span class="dv">6</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.083694</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(tasa_compuesta, <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.3694</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 14. Comparación con la media aritmética simple</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(tasas), <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.4</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 15. Verificación con paquetes</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>G_psych <span class="ot">&lt;-</span> psych<span class="sc">::</span><span class="fu">geometric.mean</span>(factores)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>G_desc  <span class="ot">&lt;-</span> DescTools<span class="sc">::</span><span class="fu">Gmean</span>(factores)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">manual =</span> G, <span class="at">psych =</span> G_psych, <span class="at">DescTools =</span> G_desc) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">6</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   manual     psych DescTools 
+ 1.083694  1.083694  1.083694 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">manual =</span> tasa_compuesta,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">psych =</span> (G_psych <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">DescTools =</span> (G_desc <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   manual     psych DescTools 
+   8.3694    8.3694    8.3694 </code></pre>
+</div>
+</div>
+<p><strong>Interpretación (actividad 14).</strong> La tasa anual compuesta promedio es 8.37 %, ligeramente inferior a la media aritmética de las tasas (8.4 %). Difieren porque el crecimiento se <strong>acumula multiplicativamente</strong>: cada año crece sobre la base del año anterior. La media geométrica es la tasa constante que, aplicada durante cinco años, produce el mismo crecimiento total que las tasas observadas. La media aritmética siempre es mayor o igual que la geométrica, y la diferencia crece con la dispersión de las tasas.</p>
+</section>
+</section>
+<section id="parte-ii.-datos-agrupados-en-tablas-de-frecuencias" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> PARTE II. Datos agrupados en tablas de frecuencias</h1>
+<section id="ejercicio-4.-número-de-trámites-atendidos" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="ejercicio-4.-número-de-trámites-atendidos"><span class="header-section-number">3.1</span> Ejercicio 4. Número de trámites atendidos</h2>
+<p><strong>Fórmula (media aritmética ponderada):</strong></p>
+<p><span class="math display">\bar{x} = \frac{\sum f_i x_i}{N}, \qquad N = \sum f_i</span></p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 16. Data frame</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">16</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>fi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">5</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>tabla4 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(xi, fi, <span class="at">fi_xi =</span> fi <span class="sc">*</span> xi)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>tabla4</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  xi fi fi_xi
+1  8  3    24
+2 10  5    50
+3 12  9   108
+4 14  8   112
+5 16  5    80</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 17. Media ponderada</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">sum</span>(fi)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>media_pond <span class="ot">&lt;-</span> <span class="fu">sum</span>(fi <span class="sc">*</span> xi) <span class="sc">/</span> N</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>N</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(media_pond, <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.4667</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 18. Verificación expandiendo los datos</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">rep</span>(xi, <span class="at">times =</span> fi)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(datos)                 <span class="co"># debe ser igual a N</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(datos), <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.4667</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comprobación del error al ignorar las frecuencias (actividad 20)</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(xi), <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12</code></pre>
+</div>
+</div>
+<p><strong>Interpretación (actividad 19).</strong> En promedio cada funcionario atendió aproximadamente 12.47 trámites por jornada.</p>
+<p><strong>Por qué no usar <code>mean(xi)</code> (actividad 20).</strong> <code>mean(xi)</code> = 12 trata cada valor distinto (8, 10, 12, 14, 16) como si hubiera un solo funcionario en cada uno. Pero hay 9 funcionarios con 12 trámites y solo 3 con 8, así que los valores no pesan igual. Ignorar las frecuencias distorsiona el resultado.</p>
+</section>
+<section id="ejercicio-5.-tasas-de-procesamiento-de-expedientes" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="ejercicio-5.-tasas-de-procesamiento-de-expedientes"><span class="header-section-number">3.2</span> Ejercicio 5. Tasas de procesamiento de expedientes</h2>
+<p><strong>Fórmula (media armónica ponderada):</strong></p>
+<p><span class="math display">H = \frac{N}{\sum f_i / x_i}</span></p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 21. Data frame</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">10</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>fi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">3</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>tabla5 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(xi, fi, <span class="at">fi_sobre_xi =</span> fi <span class="sc">/</span> xi)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>tabla5</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  xi fi fi_sobre_xi
+1  4  4       1.000
+2  5  6       1.200
+3  8  7       0.875
+4 10  3       0.300</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(xi <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">sum</span>(fi)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 22. Media armónica ponderada</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>H <span class="ot">&lt;-</span> N <span class="sc">/</span> <span class="fu">sum</span>(fi <span class="sc">/</span> xi)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(H, <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.9259</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 23. Verificación con datos expandidos</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">rep</span>(xi, <span class="at">times =</span> fi)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(psych<span class="sc">::</span><span class="fu">harmonic.mean</span>(datos), <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.9259</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(DescTools<span class="sc">::</span><span class="fu">Hmean</span>(datos), <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.9259</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 24. Media aritmética ponderada y comparación</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">sum</span>(fi <span class="sc">*</span> xi) <span class="sc">/</span> N</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>comparacion5 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Medida =</span> <span class="fu">c</span>(<span class="st">"Armónica ponderada"</span>, <span class="st">"Aritmética ponderada"</span>),</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Expedientes/hora</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">c</span>(H, A), <span class="dv">4</span>),</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(comparacion5)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Medida</th>
+<th style="text-align: right;">Expedientes/hora</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Armónica ponderada</td>
+<td style="text-align: right;">5.9259</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Aritmética ponderada</td>
+<td style="text-align: right;">6.6000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>Discusión (actividad 25).</strong> La armónica ponderada (5.93) es menor que la aritmética (6.6). Cuál es defendible depende de qué se mantiene constante:</p>
+<ul>
+<li>La <strong>media armónica</strong> es la correcta cuando cada tasa se observa sobre la <strong>misma cantidad de trabajo</strong> (el mismo número de expedientes, es decir, igual “numerador”). Entonces el tiempo total es <span class="math inline">\sum (\text{expedientes}/x_i)</span> y la tasa global real es expedientes totales / tiempo total.</li>
+<li>La <strong>media aritmética</strong> es la correcta cuando cada tasa se observa durante el <strong>mismo tiempo</strong> (jornadas de igual duración), pues los expedientes totales son <span class="math inline">\sum x_i \cdot t</span>.</li>
+</ul>
+<p>Aquí las frecuencias cuentan <em>jornadas</em>. Si todas las jornadas tienen igual duración, el promedio de tasas apropiado sería el aritmético (6.6), y la armónica subestimaría el rendimiento. La armónica sería defendible solo si cada grupo de jornadas hubiera procesado un volumen <strong>igual de expedientes</strong>, algo que el enunciado no indica. En conclusión: para interpretar la armónica como promedio de tasas debe garantizarse una <strong>exposición equivalente en cantidad de trabajo</strong> entre los grupos.</p>
+</section>
+<section id="ejercicio-6.-factores-de-crecimiento-de-la-cobertura" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="ejercicio-6.-factores-de-crecimiento-de-la-cobertura"><span class="header-section-number">3.3</span> Ejercicio 6. Factores de crecimiento de la cobertura</h2>
+<p><strong>Fórmula (media geométrica ponderada):</strong></p>
+<p><span class="math display">G = \exp\left(\frac{\sum f_i \ln x_i}{\sum f_i}\right)</span></p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 26. Vectores</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.02</span>, <span class="fl">1.05</span>, <span class="fl">1.08</span>, <span class="fl">1.12</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>fi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(xi <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 27. Media geométrica ponderada</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">sum</span>(fi <span class="sc">*</span> <span class="fu">log</span>(xi)) <span class="sc">/</span> <span class="fu">sum</span>(fi))</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(G, <span class="dv">6</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.061535</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 28. Tasa porcentual</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>tasa <span class="ot">&lt;-</span> (G <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(tasa, <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.1535</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 29. Verificación con datos expandidos</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">rep</span>(xi, <span class="at">times =</span> fi)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(DescTools<span class="sc">::</span><span class="fu">Gmean</span>(datos), <span class="dv">6</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.061535</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(psych<span class="sc">::</span><span class="fu">geometric.mean</span>(datos), <span class="dv">6</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.061535</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Referencia: media aritmética ponderada de los factores</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">sum</span>(fi <span class="sc">*</span> xi) <span class="sc">/</span> <span class="fu">sum</span>(fi), <span class="dv">6</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.062</code></pre>
+</div>
+</div>
+<p><strong>Interpretación (actividad 30).</strong> El factor de crecimiento promedio es 1.0615, equivalente a un crecimiento anual típico de la cobertura de 6.15 %. Los factores se <strong>multiplican</strong> de un periodo a otro (la cobertura final es la inicial por el producto de los factores), por eso el promedio adecuado es la media geométrica: es el factor constante que reproduce el mismo efecto acumulado. Promediar aritméticamente los factores sobrestimaría ligeramente el crecimiento.</p>
+</section>
+</section>
+<section id="parte-iii.-datos-agrupados-en-intervalos" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> PARTE III. Datos agrupados en intervalos</h1>
+<section id="ejercicio-7.-gasto-mensual-por-habitante" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="ejercicio-7.-gasto-mensual-por-habitante"><span class="header-section-number">4.1</span> Ejercicio 7. Gasto mensual por habitante</h2>
+<p><strong>Fórmulas:</strong></p>
+<p><span class="math display">m_i = \frac{L_i + L_s}{2}, \qquad \bar{x} \approx \frac{\sum f_i m_i}{N}</span></p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 31-34. Tabla con dplyr</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>tabla7 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Li =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>, <span class="dv">500</span>),</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Ls =</span> <span class="fu">c</span>(<span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>, <span class="dv">500</span>, <span class="dv">600</span>),</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fi =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">14</span>, <span class="dv">8</span>, <span class="dv">4</span>)</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Intervalo =</span> <span class="fu">paste0</span>(Li, <span class="st">" – &lt;"</span>, Ls),</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">mi        =</span> (Li <span class="sc">+</span> Ls) <span class="sc">/</span> <span class="dv">2</span>,        <span class="co"># 32. marca de clase</span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fi_mi     =</span> fi <span class="sc">*</span> mi               <span class="co"># 33. producto fi*mi</span></span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Intervalo, Li, Ls, fi, mi, fi_mi)</span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabla7, <span class="at">caption =</span> <span class="st">"Gasto mensual por habitante (miles de pesos)"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Gasto mensual por habitante (miles de pesos)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Intervalo</th>
+<th style="text-align: right;">Li</th>
+<th style="text-align: right;">Ls</th>
+<th style="text-align: right;">fi</th>
+<th style="text-align: right;">mi</th>
+<th style="text-align: right;">fi_mi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">100 – &lt;200</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">750</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">200 – &lt;300</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">250</td>
+<td style="text-align: right;">2250</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">300 – &lt;400</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">400</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">350</td>
+<td style="text-align: right;">4900</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">400 – &lt;500</td>
+<td style="text-align: right;">400</td>
+<td style="text-align: right;">500</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">450</td>
+<td style="text-align: right;">3600</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">500 – &lt;600</td>
+<td style="text-align: right;">500</td>
+<td style="text-align: right;">600</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">550</td>
+<td style="text-align: right;">2200</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">sum</span>(tabla7<span class="sc">$</span>fi)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>media_aprox <span class="ot">&lt;-</span> <span class="fu">sum</span>(tabla7<span class="sc">$</span>fi_mi) <span class="sc">/</span> N</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>N</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 40</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(media_aprox, <span class="dv">2</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 342.5</code></pre>
+</div>
+</div>
+<p><strong>Interpretación (actividad 35).</strong> El gasto mensual promedio estimado es de aproximadamente <strong>342.5 miles de pesos</strong> por habitante (unos $342.500). Es un valor <strong>aproximado</strong> porque se desconocen los datos originales: se supone que todos los barrios de un intervalo gastan exactamente lo que indica su marca de clase, y la distribución real dentro de cada intervalo puede ser distinta.</p>
+</section>
+<section id="ejercicio-8.-índice-de-crecimiento-de-ingresos" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="ejercicio-8.-índice-de-crecimiento-de-ingresos"><span class="header-section-number">4.2</span> Ejercicio 8. Índice de crecimiento de ingresos</h2>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 36. Límites y marcas de clase</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>Li <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.00</span>, <span class="fl">1.04</span>, <span class="fl">1.08</span>, <span class="fl">1.12</span>)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>Ls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.04</span>, <span class="fl">1.08</span>, <span class="fl">1.12</span>, <span class="fl">1.16</span>)</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>fi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">10</span>, <span class="dv">9</span>, <span class="dv">5</span>)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>mi <span class="ot">&lt;-</span> (Li <span class="sc">+</span> Ls) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(mi <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>tabla8 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(Li, Ls, fi, mi, <span class="at">fi_ln_mi =</span> fi <span class="sc">*</span> <span class="fu">log</span>(mi))</span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabla8, <span class="at">digits =</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Li</th>
+<th style="text-align: right;">Ls</th>
+<th style="text-align: right;">fi</th>
+<th style="text-align: right;">mi</th>
+<th style="text-align: right;">fi_ln_mi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.04</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1.02</td>
+<td style="text-align: right;">0.1188</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.04</td>
+<td style="text-align: right;">1.08</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1.06</td>
+<td style="text-align: right;">0.5827</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.08</td>
+<td style="text-align: right;">1.12</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1.10</td>
+<td style="text-align: right;">0.8578</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.12</td>
+<td style="text-align: right;">1.16</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.14</td>
+<td style="text-align: right;">0.6551</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 37. Media geométrica aproximada</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">sum</span>(fi <span class="sc">*</span> <span class="fu">log</span>(mi)) <span class="sc">/</span> <span class="fu">sum</span>(fi))</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(G, <span class="dv">6</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.076607</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 38. Tasa porcentual</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>tasa <span class="ot">&lt;-</span> (G <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(tasa, <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.6607</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Referencia para la actividad 40</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">sum</span>(fi <span class="sc">*</span> mi) <span class="sc">/</span> <span class="fu">sum</span>(fi)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(A, <span class="dv">6</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.077333</code></pre>
+</div>
+</div>
+<p><strong>Supuesto (actividad 39).</strong> Representar cada intervalo por su marca de clase supone que los factores de las unidades dentro del intervalo se concentran en el punto medio (o que se distribuyen de forma simétrica y uniforme). Por eso el resultado es una aproximación.</p>
+<p><strong>Comparación con la media aritmética (actividad 40).</strong> El factor geométrico promedio es 1.0766 (crecimiento anual típico ≈ 7.66 %), frente a 1.0773 de la media aritmética de los factores. La geométrica es la adecuada porque los factores se componen multiplicativamente; la aritmética es siempre mayor o igual, y la diferencia es pequeña aquí porque los factores son poco dispersos.</p>
+</section>
+</section>
+<section id="parte-iv.-integración-y-análisis" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> PARTE IV. Integración y análisis</h1>
+<section id="ejercicio-9.-selección-de-la-medida-adecuada" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="ejercicio-9.-selección-de-la-medida-adecuada"><span class="header-section-number">5.1</span> Ejercicio 9. Selección de la medida adecuada</h2>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>seleccion <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Indicador =</span> <span class="fu">c</span>(<span class="st">"(a) Días que tardan los trámites"</span>,</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">"(b) Velocidades en recorridos de igual distancia"</span>,</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">"(c) Factores anuales de crecimiento de cobertura"</span>),</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Medida =</span> <span class="fu">c</span>(<span class="st">"Aritmética"</span>, <span class="st">"Armónica"</span>, <span class="st">"Geométrica"</span>),</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  Justificación <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Valores aditivos en la misma unidad (días); cada trámite pesa igual y la suma tiene sentido."</span>,</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Se promedian razones (km/h) con distancia fija: el promedio real es distancia total / tiempo total."</span>,</span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Los factores se acumulan multiplicativamente; se busca el factor constante equivalente."</span></span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(seleccion)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 6%">
+<col style="width: 62%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Indicador</th>
+<th style="text-align: left;">Medida</th>
+<th style="text-align: left;">Justificación</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(a) Días que tardan los trámites</td>
+<td style="text-align: left;">Aritmética</td>
+<td style="text-align: left;">Valores aditivos en la misma unidad (días); cada trámite pesa igual y la suma tiene sentido.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(b) Velocidades en recorridos de igual distancia</td>
+<td style="text-align: left;">Armónica</td>
+<td style="text-align: left;">Se promedian razones (km/h) con distancia fija: el promedio real es distancia total / tiempo total.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(c) Factores anuales de crecimiento de cobertura</td>
+<td style="text-align: left;">Geométrica</td>
+<td style="text-align: left;">Los factores se acumulan multiplicativamente; se busca el factor constante equivalente.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>41–42. Elección y justificación.</strong> Ver la tabla anterior.</p>
+<p><strong>43. Por qué no una única medida.</strong> Cada media responde a una estructura distinta del fenómeno: suma de cantidades (aritmética), razones con numerador constante (armónica) y productos de cambios relativos (geométrica). Aplicar la misma a todos produce sesgos: la aritmética sobrestima velocidades promedio y tasas compuestas; la armónica y la geométrica no tienen sentido para tiempos simples. Además existe la relación <span class="math inline">H \le G \le \bar{x}</span>, de modo que elegir mal sistemáticamente desplaza el resultado.</p>
+<p><strong>44. Indicadores adicionales propuestos.</strong></p>
+<ul>
+<li><strong>Aritmética:</strong> monto promedio de recaudación de impuesto predial por predio, o número promedio de personas atendidas por ventanilla por día.</li>
+<li><strong>Armónica:</strong> rendimiento promedio (km por galón) de vehículos de inspección que recorren la misma ruta, o costo por beneficiario cuando se gasta un mismo presupuesto en distintos programas.</li>
+<li><strong>Geométrica:</strong> crecimiento anual compuesto del presupuesto de inversión, o variación anual de la matrícula en programas sociales.</li>
+</ul>
+</section>
+<section id="ejercicio-10.-informe-breve-de-resultados" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="ejercicio-10.-informe-breve-de-resultados"><span class="header-section-number">5.2</span> Ejercicio 10. Informe breve de resultados</h2>
+<section id="objetivo-y-contexto" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="objetivo-y-contexto"><span class="header-section-number">5.2.1</span> Objetivo y contexto</h3>
+<p>La Secretaría de Hacienda de un municipio requiere conocer la <strong>tasa anual compuesta promedio de crecimiento de la recaudación propia</strong> en los últimos cinco años, para proyectar ingresos y compararla con el resultado de otras entidades. Se dispone de las tasas anuales de crecimiento: 6 %, 9 %, 12 %, 5 % y 10 % (datos simulados).</p>
+</section>
+<section id="medida-fórmula-y-justificación" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="medida-fórmula-y-justificación"><span class="header-section-number">5.2.2</span> Medida, fórmula y justificación</h3>
+<p>Se calculó la <strong>media geométrica</strong> de los factores de crecimiento <span class="math inline">f_i = 1 + r_i/100</span>:</p>
+<p><span class="math display">G = \left(\prod f_i\right)^{1/n}, \qquad \text{tasa compuesta} = (G-1)\times 100</span></p>
+<p>La recaudación de cada año crece sobre la del año anterior, por lo que el efecto acumulado es un producto de factores; la media geométrica es la que conserva ese efecto acumulado.</p>
+</section>
+<section id="código-y-resultado" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="código-y-resultado"><span class="header-section-number">5.2.3</span> Código y resultado</h3>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>tasas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>factores <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> tasas <span class="sc">/</span> <span class="dv">100</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">mean</span>(<span class="fu">log</span>(factores)))</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>tasa_compuesta <span class="ot">&lt;-</span> (G <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>resultado10 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Medida =</span> <span class="fu">c</span>(<span class="st">"Media geométrica de factores"</span>, <span class="st">"Tasa anual compuesta (%)"</span>,</span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Media aritmética de tasas (%)"</span>,</span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Crecimiento acumulado del periodo (%)"</span>),</span>
+<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Valor =</span> <span class="fu">round</span>(<span class="fu">c</span>(G, tasa_compuesta, <span class="fu">mean</span>(tasas),</span>
+<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a>                  (<span class="fu">prod</span>(factores) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span>), <span class="dv">4</span>)</span>
+<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(resultado10)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Medida</th>
+<th style="text-align: right;">Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Media geométrica de factores</td>
+<td style="text-align: right;">1.0837</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tasa anual compuesta (%)</td>
+<td style="text-align: right;">8.3694</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Media aritmética de tasas (%)</td>
+<td style="text-align: right;">8.4000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Crecimiento acumulado del periodo (%)</td>
+<td style="text-align: right;">49.4625</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comprobación: aplicar G cinco veces equivale al crecimiento acumulado</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(G<span class="sc">^</span><span class="dv">5</span>, <span class="fu">prod</span>(factores))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretación-en-lenguaje-de-gestión-pública" class="level3" data-number="5.2.4">
+<h3 data-number="5.2.4" class="anchored" data-anchor-id="interpretación-en-lenguaje-de-gestión-pública"><span class="header-section-number">5.2.4</span> Interpretación en lenguaje de gestión pública</h3>
+<p>La recaudación propia creció, en promedio, <strong>8.37 % anual compuesto</strong> durante el periodo. Esto equivale a un incremento acumulado de 49.5 % en cinco años. Si la administración hubiera usado la media aritmética (8.4 %), habría sobrestimado levemente el ritmo de crecimiento y, por tanto, los ingresos proyectados.</p>
+</section>
+<section id="limitación-y-condición-de-uso" class="level3" data-number="5.2.5">
+<h3 data-number="5.2.5" class="anchored" data-anchor-id="limitación-y-condición-de-uso"><span class="header-section-number">5.2.5</span> Limitación y condición de uso</h3>
+<p>La media geométrica exige que <strong>todos los factores sean positivos</strong> y asume que el crecimiento se compone año a año sobre la base anterior. Es un promedio de un periodo corto (cinco observaciones) y no garantiza que el crecimiento futuro se mantenga: no refleja la volatilidad ni cambios normativos o de la base tributaria.</p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="TallerMedias_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
